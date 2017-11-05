@@ -12,16 +12,16 @@ namespace GCLab10Alt
         static void Main(string[] args)
         {
             ArrayList cars = new ArrayList();
+
             int x = 1;
-
+            
             cars.Add(new Car(x, "Nikolai", "Model S", 2017, 54_999.00));
-            cars.Add(new Car(x, "Ford", "Escapade", 2014, 31_999.00));
-            cars.Add(new Car(x, "Chewiw", "Vette", 2013, 68_549.00));
-            cars.Add(new Car(x,"Hyonda", "Prior", 2011, 14_199.00));
-            cars.Add(new UsedCar(x, "Nikolai", "Model S", 2017, 54_999.00, "Used", 30_400.05));
-            cars.Add(new UsedCar(x, "Nikolai", "Model S", 2017, 54_999.00, "Used", 25_000.05));
-            cars.Add(new UsedCar(x, "Nikolai", "Model S", 2017, 54_999.00, "Used", 25_000.05));
-
+            cars.Add(new Car(++x, "Ford", "Escapade", 2014, 31_999.00));
+            cars.Add(new Car(++x, "Chewiw", "Vette", 2013, 68_549.00));
+            cars.Add(new Car(++x,"Hyonda", "Prior", 2011, 14_199.00));
+            cars.Add(new UsedCar(++x, "Nikolai", "Model S", 2017, 54_999.00, "Used", 30_400.05));
+            cars.Add(new UsedCar(++x, "Nikolai", "Model S", 2017, 54_999.00, "Used", 25_000.05));
+            cars.Add(new UsedCar(++x, "Nikolai", "Model S", 2017, 54_999.00, "Used", 25_000.05));
 
             bool repeat = true;
             while (repeat)
