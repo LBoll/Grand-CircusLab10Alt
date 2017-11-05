@@ -23,8 +23,8 @@ namespace GCLab10Alt
             set { miles = value; }
         }
 
-        public UsedCar(int count, string make, string model, int year, double price, string used, double miles)
-            : base(count, make, model, year, price)
+        public UsedCar(string make, string model, int year, double price, string used, double miles)
+            : base(make, model, year, price)
         {
             this.used = used;
             this.miles = miles;
@@ -32,7 +32,7 @@ namespace GCLab10Alt
 
         public override string ToString()
         {
-            return base.ToString() + $"{used, 10} {miles, 0}";
+            return base.ToString() + $"{used, 10} {miles}";
         }
     }
 }

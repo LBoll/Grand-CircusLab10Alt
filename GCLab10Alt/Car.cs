@@ -8,26 +8,18 @@ namespace GCLab10Alt
 {
     class Car
     {
-        private int count;
         private string make;
         private string model;
         private int year;
         private double price;
 
 
-        public Car(int count,string make, string model, int year, double price)
+        public Car(string make, string model, int year, double price)
         {
-            this.count = count;
             this.make = make;
             this.model = model;
             this.year = year;
             this.price = price;
-        }
-
-        public int Count
-        {
-            get { return count; }
-            set { count = value; }
         }
 
         public string Make
@@ -55,7 +47,7 @@ namespace GCLab10Alt
 
         public override string ToString()
         {
-            return $"{count} {make, - 13} {model, - 8} {year, - 8} {price, 0:C}"; //0:C formats it to the currency.
+            return $"{make, - 10} |{model, -8} |{year, - 8} |{price, 0:C}"; //0:C formats it to the currency.
         }
 
     }
