@@ -47,7 +47,7 @@ namespace GCLab10Alt
 
         public override string ToString()
         {
-            return $"{make, - 10} |{model, -8} |{year, - 8} |{price, 0:C}"; //0:C formats it to the currency.
+            return $"{make, - 10} |{model, -8} |{year, - 8} |{price, -5:C}"; //0:C formats it to the currency.
         }
 
     }

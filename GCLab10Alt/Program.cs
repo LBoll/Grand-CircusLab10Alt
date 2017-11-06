@@ -13,84 +13,106 @@ namespace GCLab10Alt
         {
             bool repeat = true;
 
-            Console.WriteLine("Welcome to the car dealership! ");
+            Console.WriteLine("Welcome to the Boll dealership! ");
 
             ArrayList cars = new ArrayList();
 
-            cars.Add(new Car("Nikolai", "Model S", 2017, 54_999.00));
-            cars.Add(new Car("Ford", "Escapade", 2014, 31_999.00));
-            cars.Add(new Car("Chewiw", "Vette", 2013, 68_549.00));
-            cars.Add(new Car("Hyonda", "Prior", 2011, 14_199.00));
-            cars.Add(new UsedCar("Nikolai", "Model S", 2017, 54_999.00, "(Used)", 30_400.05));
-            cars.Add(new UsedCar("Hello", "Model S", 2017, 54_999.00, "(Used)", 25_000.05));
+            cars.Add(new Car("Genesis", "G80", 2017, 78_599.00));
+            cars.Add(new Car("Dacia", "Duster", 2017, 31_999.00));
+            cars.Add(new Car("Audi", "A3", 2017, 68_549.00));
+            cars.Add(new Car("Fiat", "500C", 2017, 14_199.00));
+            cars.Add(new UsedCar("DKW", "F8", 1939, 9_500.00, "(Used)", 1_600.99));
+            cars.Add(new UsedCar("BYD", "Flyer", 2004, 1800.01, "(Used)", 25_000.05));
+            cars.Add(new UsedCar("Lexus", "IS", 2014, 7_899.90, "(Used)", 110_980.25));
 
             while (repeat)
             {
-                while (cars.Count > 0)
+                Garage(cars);
+
+                int index = Validator(cars);// Method for validation
+
+                if (index == 100)
                 {
-                    Console.WriteLine("\nHere are our current list of cars!\n");
-                    Console.WriteLine("*======*======*======*======*======*======*======*======*======* ");
-                    Console.WriteLine("  Make         Model    Year        Price      (IfUsed) Miles");
-                    Console.WriteLine("*======*======*======*======*======*======*======*======*======* ");
-                    CarsList(cars);
-                    Console.WriteLine("*======*======*======*======*======*======*======*======*======* ");
-                    Console.Write("\nWhich car would you like to buy? ");
-
-                    if (Console.ReadLine() == "q")
-                    {
-                        break;
-                    }
-
-                    int index = Validator(cars);
-
-
-                    Console.WriteLine(cars[index]);
-
-                    Console.Write("Would you like to buy this car? (y/n) ");
-                    string answer = Console.ReadLine();
-
-                    if (answer == "y")
-                    {
-                        cars.RemoveAt(index);
-                        Console.WriteLine("\nThank you for purchasing this car!");
-                        repeat = true;
-                    }
-
-                    else if (answer == "n")
-                    {
-                        repeat = true;
-                    }
-
-                    else
-                    {
-                        Console.WriteLine("Sorry, Please enter a valid input! ");
-                    }
-
+                    break;
                 }
 
-                Console.WriteLine("We are all sold out!");
-                repeat = false;
+                Console.WriteLine(cars[index]);//Displays what car you would like to purchase
+
+                Console.Write("Would you like to buy this car? (y/n) ");
+                repeat = BuyCar(repeat, cars, index);//Removes the car if you want to buy it, otherwise continues to trying and buy a car.
+
             }
 
-            Console.WriteLine("Thank you for shopping!\n Goodbye! ");
+            
+            Console.WriteLine("Thank you for shopping!\nGoodbye! ");
         }
 
-        private static int Validator(ArrayList cars)
-        {
-            int index;
-            while (!int.TryParse(Console.ReadLine(), out index) || index < 0 || index >= cars.Count)
-            {
-                Console.Write("Sorry, please enter a valid input: ");
-            }
-            return index;
-        }
 
-        private static void CarsList(ArrayList cars)
+
+
+        private static void Garage(ArrayList cars)
         {
+            Console.WriteLine("\nHere are our current list of cars!");
+            Console.WriteLine("*======*======*======*======*======*======*======*======*======* ");
+            Console.WriteLine("  Make         Model    Year        Price     (IfUsed) Miles");
+            Console.WriteLine("*======*======*======*======*======*======*======*======*======* ");
             for (int i = 0; i < cars.Count; i++)
             {
                 Console.WriteLine($"{i}:{cars[i]}");
             }
+            Console.WriteLine("*======*======*======*======*======*======*======*======*======* ");
+            Console.Write("\nWhich car would you like to buy? ");
+        }
+
+
+
+
+        private static bool BuyCar(bool repeat, ArrayList cars, int index)
+        {
+            Car choice = (Car)cars[index];
+            string answer = Console.ReadLine().ToLower().Trim();
+
+            if (answer == "y")
+            {
+                cart.Add(index);
+                cars.RemoveAt(index);//Removes whatever car the user decided to buy
+                Console.WriteLine($"\nThank you for purchasing! You are going to love your new {choice.Make} {choice.Model}!");
+                repeat = true;
+            }
+
+            else if (answer == "n")
+            {
+                Console.WriteLine($"\n${choice.Price} a little steep for ya? Well see if there is any more you like! ");
+                repeat = true;
+            }
+
+            else
+            {
+                Console.WriteLine("Sorry, Please enter a valid input! (enter Q to leave the dealership): ");
+            }
+
+            return repeat;
+        }
+
+
+
+
+        private static int Validator(ArrayList cars)
+        {
+            string input = Console.ReadLine();
+            int index;
+
+            if (input == "q")
+            {
+                return 100;
+            }
+
+            while (!int.TryParse(input, out index) || index < 0 || index >= cars.Count)
+            {
+                Console.Write("Please pick a number for one of the cars listed above: ");
+            }
+
+            return index;
         }
     }
 }
